@@ -21,6 +21,14 @@ export default class Validator {
         return value.length <= maxSize ? error : null
     }
 
+    static sizeLargerThen(value: string | any[], minSize: number, error: string) {
+        return value.length >= minSize ? error : null
+    }
+
+    static regex(value: string, regex: RegExp, erro: string): string | null {
+        return regex.test(value) ? null : erro
+    }
+
     static isValidEmail(email: string): boolean {
         const regex: RegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
         return regex.test(email)
