@@ -5,13 +5,16 @@ export default class CPF{
     readonly value: string
 
     constructor(value: string) {
-        this.value = value
+        this.value = value.replace(/\D/g, '')
         if(!CPF.verify(value)) throw Errors.INVALID_CPF
     }
 
     get formatCPF() {
-        let formatValue = this.value.slice(0, 9).match(/.{1,3}/g)?.join('.')
-        return formatValue + '-' + this.value.slice(9, 11)
+        return this.value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
+    }
+
+    get verifierDigit() {
+        return this.value.slice(9)
     }
 
     static verify(cpf: string): boolean {
