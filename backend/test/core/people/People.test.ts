@@ -60,10 +60,26 @@ test('Deve armazenar props corretamente', () => {
     expect(people.props.cpf).toBe(props.cpf)
 })
 
-test('Deve clonar uma pessoa com base em novos dados', () => {
+test('Deve clonar uma pessoa com nome alterado', () => {
     const props = { name: 'Diego Sousa da Silva', cpf: '99974602009' }
     const people = new People(props)
     const newPeople = people.clone({name: "Filipe Sousa da Silva", cpf: "00000000000"})
     expect("Filipe Sousa da Silva").toBe(newPeople.name.fullName)
     expect("00000000000").toBe(newPeople.cpf.value)
+})
+
+test('Deve comparar duas pessoas iguais', () => {
+    const props = { name: 'Diego Sousa da Silva', cpf: '99974602009' }
+    const people = new People(props)
+    const newPeople = people.clone()
+    expect(true).toBe(people.equals(newPeople))
+    expect(false).toBe(people.diferent(newPeople))
+})
+
+test('Deve comparar duas pessoas iguais', () => {
+    const props = { name: 'Diego Sousa da Silva', cpf: '99974602009' }
+    const people = new People(props)
+    const newPeople2 = new People(props)
+    expect(false).toBe(people.equals(newPeople2))
+    expect(true).toBe(people.diferent(newPeople2))
 })

@@ -15,4 +15,12 @@ export default class Id {
     static generate() {
         return new Id()
     }
+
+    equals(otherId: Id): boolean {
+        return this.value === otherId.value
+    }
+
+    diferent(otherId: Id): boolean {
+        return this.value !== otherId.value
+    }
 }

@@ -1,28 +1,24 @@
 import CPF from "../shared/CPF";
-import Id from "../shared/Id";
+import Entity from "../shared/Entity";
 import PeopleName from "../shared/PeopleName";
 
 export interface PeopleProps {
+    id?: string
     name: string
     cpf: string
-    id?: string
 }
 
-export default class People {
-    readonly props: PeopleProps
-
+export default class People extends Entity<PeopleProps>{
     readonly name: PeopleName
     readonly cpf: CPF
-    readonly id: Id
 
     constructor(props: PeopleProps) {
-        this.props = props
-        this.id = props.id ? new Id(props.id) : Id.generate()
+        super(props)
         this.name = new PeopleName(props.name)
         this.cpf = new CPF(props.cpf)
     }
 
-    clone(newProps: Partial<PeopleProps>) {
-        return new People({...this.props, ...newProps, id: this.id.value})
-    }
+    // clone(newProps: Partial<PeopleProps>): People {
+    //     return new People({...this.props, ...newProps, id: this.id.value})
+    // }
 }

@@ -17,3 +17,19 @@ test('Deve criar um id a partir de um id já existente', ()=>{
 test('Deve lançar erro ao tentar criar um Id a partir de um valor inválido', ()=>{
     expect(()=> new Id('123')).toThrow(Errors.INVALID_ID)
 })
+
+test('Deve comparar se um Id é igual ao outro', ()=>{
+    const id: Id = Id.generate()
+    const otherId: Id = Id.generate()
+
+    expect(true).toBe(id.equals(id))
+    expect(false).toBe(id.equals(otherId))
+})
+
+test('Deve comparar se um Id é diferente do outro', ()=>{
+    const id: Id = Id.generate()
+    const otherId: Id = Id.generate()
+
+    expect(false).toBe(id.diferent(id))
+    expect(true).toBe(id.diferent(otherId))
+})
