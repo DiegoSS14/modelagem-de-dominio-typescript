@@ -29,9 +29,9 @@ test('Deve comparar duas entidades diferentes', ()=>{
     expect(true).toBe(t1.diferent(t2))
 })
 
-test('Deve clonar uma entidade', ()=>{
+test('Deve clonar uma entidade com nome diferente', ()=>{
     const t1 = new Test({name: 'teste 1', idade: 16})
-    const t2 = t1.clone()
-    expect(true).toBe(t1.equals(t2))
+    const t2 = t1.clone({name: 'Maria Silva'})
+    expect('Maria Silva').toEqual(t2.props.name)
 })
 
