@@ -45,6 +45,16 @@ export default class PeopleBuilder {
         return this
     }
 
+    static createMany(quantity: number) {
+        return Array.from({ length: quantity }, () =>
+            PeopleBuilder.create()
+            .withId(Id.generate().value)
+            .withName(randFullName())
+            .withCpf(generator.generateCpf())
+            .build()
+        )
+    }
+
     build(): People {
         return new People(this.props)
     }

@@ -1,5 +1,6 @@
 import { verify } from "node:crypto"
 import Errors from "../constants/Errors"
+import CPFRegion from "./CPFRegion"
 
 export default class CPF{
     readonly value: string
@@ -8,6 +9,10 @@ export default class CPF{
         const safeValue = value ?? ''
         this.value = safeValue.replace(/\D/g, '')
         if(!CPF.verify(safeValue)) throw Errors.INVALID_CPF
+    }
+
+    get region() {
+        return CPFRegion.findByCPF(this.value)
     }
 
     get formatCPF() {

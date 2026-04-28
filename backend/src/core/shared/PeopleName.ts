@@ -13,7 +13,7 @@ export default class{
             Validator.sizeSmallerThen(this.name, 4, Errors.VERY_SMALL_NAME),
             Validator.sizeLargerThen(this.name, 120, Errors.VERY_BIG_NAME),
             Validator.notEmpty(nameParts[1] ?? '', Errors.NO_LASTNAME),
-            Validator.regex(this.name, /^[a-zA-Z-À-ù@#\s]+$/, Errors.INVALID_CHARACTERS),
+            Validator.regex(this.name, /^[\p{L}\p{M}\s.'’-]+$/u, Errors.INVALID_CHARACTERS),
         )
 
         if(errors) throw Error(errors.join(','))

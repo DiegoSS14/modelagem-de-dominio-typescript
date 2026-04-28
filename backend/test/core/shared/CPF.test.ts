@@ -1,5 +1,6 @@
 import Errors from "@/core/constants/Errors"
 import CPF from "@/core/shared/CPF"
+import CPFRegion from "@/core/shared/CPFRegion"
 
 test('Deve formatar um CPF corretamente', () => {
     const baseCpf = '99974602009'
@@ -39,4 +40,13 @@ test('Deve retornar erro ao tentar criar um CPF vazio', () => {
 
 test('Validar os últimos dígitos de um CPF', () => {
     expect(CPF.verify("52998224725")).toBeTruthy()
+})
+
+test('Deve retornar a região do CPF', ()=>{
+    const cpf = new CPF('999.746.020-09')
+    const cpf2 = new CPF('456.679.624-89')
+    const cpf3 = new CPF('188.019.135-08')
+    expect(CPFRegion.findByCode(0)).toEqual(cpf.region)
+    expect(CPFRegion.findByCode(4)).toEqual(cpf2.region)
+    expect(CPFRegion.findByCode(5)).toEqual(cpf3.region)
 })
